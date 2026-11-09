@@ -1,0 +1,118 @@
+@import "tailwindcss" source(none);
+@source "../src";
+
+@theme inline {
+  --font-pixel: "Press Start 2P", monospace;
+  --font-body: "Space Grotesk", system-ui, sans-serif;
+}
+
+:root {
+  /* Misma paleta retro púrpura / rosa que la invitación */
+  --cream: oklch(0.93 0.06 330);
+  --sand: oklch(0.85 0.09 330);
+  --clay: oklch(0.62 0.19 320);
+  --ink: oklch(0.32 0.19 285);
+  --hot: oklch(0.66 0.24 340);
+  --mustard: oklch(0.8 0.13 320);
+
+  /* Paleta específica de cada set */
+  --dusk-sky-top: oklch(0.42 0.12 290);
+  --dusk-sky-bottom: oklch(0.68 0.14 30);
+  --wire: oklch(0.2 0.02 285);
+
+  --night-sky-top: oklch(0.22 0.07 280);
+  --night-sky-bottom: oklch(0.38 0.1 290);
+  --roof: oklch(0.28 0.05 280);
+  --roof-edge: oklch(0.18 0.04 280);
+
+  --facade: oklch(0.72 0.08 50);
+  --window: oklch(0.85 0.1 85);
+  --window-dark: oklch(0.4 0.08 260);
+  --railing: oklch(0.3 0.02 280);
+}
+
+body {
+  background-color: var(--ink);
+}
+
+@keyframes idle-bob {
+  0%,
+  100% {
+    transform: translateY(0) rotate(var(--rot, 0deg));
+  }
+  50% {
+    transform: translateY(-6%) rotate(calc(var(--rot, 0deg) + 3deg));
+  }
+}
+
+@keyframes shoo {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1) rotate(var(--rot, 0deg));
+    opacity: 1;
+  }
+  20% {
+    transform: translate3d(0, -8%, 0) scale(1.15) rotate(var(--rot, 0deg));
+  }
+  100% {
+    transform: translate3d(var(--fx, 120vw), var(--fy, -80vh), 0) scale(0.6)
+      rotate(var(--fr, 40deg));
+    opacity: 0;
+  }
+}
+
+@keyframes puff {
+  0% {
+    transform: scale(0.4);
+    opacity: 0.9;
+  }
+  100% {
+    transform: scale(2.2);
+    opacity: 0;
+  }
+}
+
+@keyframes reveal-in {
+  from {
+    opacity: 0;
+    transform: scale(0.94);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes star-pop {
+  0% {
+    transform: scale(0) rotate(-20deg);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1.25) rotate(8deg);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+  }
+}
+
+@utility animate-idle {
+  animation: idle-bob var(--dur, 1.6s) steps(2, end) infinite;
+}
+
+@utility animate-shoo {
+  animation: shoo 0.65s cubic-bezier(0.3, 0, 0.4, 1) forwards;
+}
+
+@utility animate-puff {
+  animation: puff 0.45s ease-out forwards;
+}
+
+@utility animate-reveal {
+  animation: reveal-in 0.4s ease-out both;
+}
+
+@utility animate-star-pop {
+  animation: star-pop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
